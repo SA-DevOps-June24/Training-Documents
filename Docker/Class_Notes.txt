@@ -195,6 +195,7 @@ Containerization using Docker :::
 				Goto https://hub.docker.com/
 				
 				Create Account 
+				
 			Install Docker Container Engine :
 			
 				Jenkins Slave Node :::
@@ -210,9 +211,10 @@ Containerization using Docker :::
 					
 					As a root user run this command:
 					
+						sudo -i
 						apt update -y
 						apt install docker.io -y
-						\
+					
 				
 				docker --version
 				
