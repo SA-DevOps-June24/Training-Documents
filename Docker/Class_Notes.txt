@@ -1,0 +1,222 @@
+AWS & DevOps | SA2402021 |
+
+######################
+Day 1 - 7th June 2024
+######################
+
+Containerization using Docker :::
+
+
+	DevOps :::
+	
+		Various Stages of DevOps ?
+		
+		Stages of DevOps :
+		
+			CI / CD 
+			
+			Continous Integration and Continous Delivery/Deployment
+			
+			Developer ::
+			
+				Dev Environment :
+					Create Source Code 	# Local Machine using Eclipse IDE/Unit Test/Tomcat - Test the Application
+						
+						Build
+						Create Artifacts(Binaries - *.war/*.jar/*.dll/*.exec)
+						
+						mywebapp.war_v1.0  	---> jdk11, tomcat9		
+
+						Sign.java	==> Sign.war 	==> ---> jdk11, tomcat9	
+						
+						Signup.java	==> Signup.war 	==> ---> jdk8, tomcat8.5	
+					
+					Package ==> Signup.war ==> Application Image (Signup.war,jdk11, tomcat9) ==> signup_appimg1:v1.0
+						
+						Add the Image to Container Registry.
+						
+				Promote the artifacts to target enviroments 				
+				
+				
+				QA(VM) 	--> mywebapp.war_v1.0	---> jdk11, tomcat9	
+						Sign.war	==> 	---> jdk11, tomcat9	
+						Signup.war 	==> 	---> jdk8, tomcat8.5	
+				
+				UAT --> mywebapp.war_v1.0	--> jdk11, tomcat9	
+				
+				PROD --> mywebapp.war_v1.0	--> jdk11, tomcat9		
+				
+				
+				Monolith Application Architecture :::
+				
+				Micro-Service Based Application Architecture :::
+				
+					Application :	E_Commerce(www.amazon.com)
+						service1		Sign.java
+						service2		Signup.java 
+						service3		payment.java
+
+
+				Environments :
+				
+					DEV Server
+					
+					QA Server 
+				
+
+	Containerization using Docker ::
+	
+		Containerization ==> It is process of packaging the Application along with its dependencies. 
+		
+			Virual Machine ::
+			
+				- VMs are called as Hardware level Virtualization 
+				- VMs are Created using Hypervisor 
+				- VMs are used to run the Operating Systems
+				- VMS consume more space and time to start
+				- VMs Consume more resource, even if there is no application running.
+
+			Container ::
+
+				- Containers are called as OS Level Virtualization
+					- Containers uses the underlying properties of OS(Kernel) like Namespace / Control Groups
+				- Containers are Created using Container Engine 
+				- Container are basically used to run the Task/Applications, NOT Operating System
+					- If we try to run the Container without any Task/Application, Container will immediately goes to exit state
+					- Container release the resources. It will never hold the resource with any task/application
+				- Container consume less space and time to start
+
+	
+		Containerization ==> It is process of packaging the Application along with its dependencies. 
+		
+			Infra-Structure Perspective :::
+			
+				Jenkins_Master(VM) 		# Create Jenkins Jobs and schedule it to run in the slave nodes.
+										Java,.net,python,nodejs,angular,ruby
+				
+					Jenkins_Slave1(VM)	# Used to perform actual build 	- Java build 
+					Jenkins_Slave2(VM)	# Used to perform actual build	- Python
+					Jenkins_Slave3(VM)	# Used to perform actual build	- NodeJS		
+					Jenkins_Slave4(VM)	# Used to perform actual build	- Angular		
+					Jenkins_Slave5(VM)	# Used to perform actual build	- .Net
+					
+					
+				Containerization :::
+				
+					- It is used to reduce the number of VMs.					
+					
+					Jenkins_Master(VM) :
+						Jenkins_Slave1(VM)
+							Container-Engine
+								C1 - Java build 
+								C2 - Python
+								C3 - NodeJS	
+								C4 - Angular	
+								C5 - .Net				
+					
+					
+			Deployment Perspective ::	
+				
+				Containerization :::
+				
+					- It is used to prevent the compatibility issues of the tools in all the higher enviroments.
+					- It is process of packaging the Application along with its dependencies. 
+
+			Developer ::
+			
+				Dev Environment :
+					Create Source Code 	# Local Machine using Eclipse IDE/Unit Test/Tomcat - Test the Application
+						
+						Build
+						Create Artifacts(Binaries - *.war/*.jar/*.dll/*.exec)
+						
+						mywebapp.war_v1.0  	---> jdk11, tomcat9		
+					
+					Package ==> mywebapp.war_v1.0 ==> Application Image (mywebapp.war_v1.0, jdk11, tomcat9) ==> mywebapp_img:v1.0
+						
+						Publish the Application Image to Container Registry.
+						
+				Promote the artifacts to target enviroments 				
+				
+				
+				QA(VM) 	-->
+						mywebapp_img:v1.0			(mywebapp.war_v1.0,jdk11, tomcat9)
+						Create Container out of this image and run the container.
+
+				
+				UAT --> mywebapp_img:v1.0			(mywebapp.war_v1.0,jdk11, tomcat9)
+						Create Container out of this image and run the container.
+				
+				PROD --> mywebapp_img:v1.0			(mywebapp.war_v1.0,jdk11, tomcat9)
+						 Create Container out of this image and run the container.
+				
+				
+		
+		Terminologies :::
+		
+			Container Image 	# Is a static file, that define the properties(application & its dependencies) of the container
+								# Image are Non-Executable
+								
+			Container			# Executable units of Container Image
+			
+			Container Registry	# Is used to store/Manage the Container Images
+								# DockerHub 
+								
+			Container Repository# It is sub-set of Container Registry
+			
+			Container Engine	# Is used create the Container Image, Container and Manage the Container
+								# Docker Container Engine
+		
+		
+		Docker Containers :::
+		
+		Managed Services ::
+		
+			AWS 		ECS, ECR, EKS
+			
+			AZURE		ACS, ACR, AKS 
+			
+			GCP 		GCE, GCR, GKE
+			
+		DevOps Tools :
+		
+			Open-Source DevOps Tools :
+				git, jekins,docker,kubernetes,.....
+			
+			Managed Services
+			
+				Service Providers - Paid Service 
+			
+			
+		Working with Docker ::
+		
+			Container Registry :
+			
+				Goto https://hub.docker.com/
+				
+				Create Account 
+			Install Docker Container Engine :
+			
+				Jenkins Slave Node :::
+				
+				Launch a Virtual Machine on AWS Cloud Platform 
+				
+					Ubuntu 22.04 
+					
+					Install Docker Engine 			https://docs.docker.com/engine/install/
+					
+					docker cli			# Is a command line utility to interact with Docker Engine and work with Images and Containers
+					
+					
+					As a root user run this command:
+					
+						apt update -y
+						apt install docker.io -y
+						\
+				
+				docker --version
+				
+				
+Next ::
+		Docker CLI - Misc Command 
+				
