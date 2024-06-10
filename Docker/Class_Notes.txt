@@ -222,3 +222,226 @@ Containerization using Docker :::
 Next ::
 		Docker CLI - Misc Command 
 				
+
+######################
+Day 2 - 10th June 2024
+######################
+
+	Docker CLI Commands :
+	
+		Working with Images, containers
+		Volumes 
+		Port Mapping 
+		Create New Container Images 
+			- docker commit
+			- docker build
+		Container Orchestration tools 
+			- Overview of Docker Swarm 
+			- Kubernetes 
+			
+	Docker CLI Commands :
+
+		docker images  		# used to get the list of images in local machine 
+		
+		docker ps			# used to get the list of running containers 
+		
+		docker ps -a 		# used to get the list of container in running/exit state
+		
+		
+		docker pull <image>	# Download image from container registry
+		
+		
+		docker run <image_name>		# Used to create a Container and execute it.
+		
+		Modes of Container Exection :
+		
+			Foreground/Attached Mode 	# It run the container in active terminal				# Default
+										# Till the process completes, it will hold the terminal 
+										
+				docker run centos sleep 20 
+		
+			Background/detached Mode 	# Container run in background mode 
+			
+				docker run -d centos sleep 20
+			
+			Interactive Mode			# Login to Container and access the container volumes/files 
+		
+				docker run -it centos bash 
+		
+				docker run -d --name=appteam1 centos sleep 60			# Using --name Tag
+		Jenkins_Slave Node :: (VM) 
+			jdk 
+			git
+			maven
+						App_Build_Server (VM)
+							Container-Engine
+								C1 - Java build 
+								
+								
+			docker start <container_id>		# Start the Container that is in exited/stopped state 
+			
+			docker stop <contianer_id> 		# Stop the running Container
+			
+			docker exec -it <container_id> bash		# To login to running container
+			
+			
+			docker rm <Container_id>		# remove the container 
+			
+			docker rmi <image_name>			# Delete the Image
+			docker rmi -f <image_name 		# Forceful deletion of Image from local Machine 
+		
+		
+	
+	Volumes :::
+	
+		Docker Volumes :::
+		
+			- Used to maintain the persistant container data.
+			- Using Docker Volumes we can save the container data into the host machine.
+			- We can pass the data to the container volume from host machine.
+			
+		
+			docker run -it --mount source=sa-devops-junvol1,destination=/sa-devops-junvol1 centos bash
+			
+			
+						App_Build_Server (VM)
+							Container-Engine
+								C1 - Java build - git,jdk,maven - sa-vol1
+
+	
+	
+	Port Mapping/Binding :::
+	
+		- It is used map the container port with the host port.
+	
+		-p <host_port>:<container_port>
+		
+		
+		docker run -it -p 8086:8080 tomcat:8.0
+		
+		App_Build_Server(VM)
+			Container_Engine
+				C1(tomcat)	*.war 
+				C2(tomcat)	*.war 
+				C3(tomcat)	*.war 
+				C4(tomcat)	*.war 
+				
+    1  apt update -y
+    2  apt install docker.io -y
+    3  docker --version
+    4  clear
+    5  docker --version
+    6  docker images
+    7  docker ps
+    8  docker ps -a
+    9  docker pull centos
+   10  docker images
+   11  docker run centos
+   12  docker ps
+   13  docker ps -a
+   14  docker run centos
+   15  docker ps -a
+   16  clear
+   17  docker images
+   18  docker ps -a
+   19  docker ps
+   20  docker run centos sleep 20
+   21  docker run centos sleep 10
+   22  adfasd
+   23  docker run -d centos sleep 10
+   24  docker ps
+   25  docker ps -a
+   26  docker run -it centos bash
+   27  docker ps
+   28  docker ps -a
+   29  docker start c33c756907a4
+   30  docker ps
+   31  docker exec -it c33c756907a4 bash
+   32  docker ps
+   33  docker stop c33c756907a4
+   34  docker ps
+   35  docker run -d centos sleep 60
+   36  docker ps
+   37  docker exec 31735f0dc618 bash
+   38  docker exec -it 31735f0dc618 bash
+   39  docker ps
+   40  docker stop 31735f0dc618
+   41  docker ps -a
+   42  docker run -d --name=appteam1 centos sleep 60
+   43  docker ps
+   44  docker ps -a
+   45  clear
+   46  docker images
+   47  docker run -it alpine bash
+   48  clear
+   49  docker images
+   50  docker ps -a
+   51  docker ps
+   52  docker rm 9c10b7e47c4b
+   53  docker ps
+   54  docker ps -a
+   55  docker rm 0ee6dc49b685 51aa0f15e46e
+   56  docker ps -a
+   57  docker rmi centos
+   58  docker rmi alpine
+   59  docker rm cd0419f817e3
+   60  docker rmi alpine
+   61  docker images
+   62  clear
+   63  docker ps
+   64  docker volume list
+   65  docker volume create sa-devops-junvol1
+   66  docker volume list
+   67  docker volume inspect sa-devops-junvol1
+   68  cd /var/lib/docker/volumes
+   69  ls
+   70  cd sa-devops-junvol1/
+   71  ls
+   72  cd _data/
+   73  clear
+   74  docker volume list
+   75  cd ~
+   76  docker run -it centos bash
+   77  docker run -it --mount source=sa-devops-junvol1 destination=/sa-devops-junvol1 centos bash
+   78  docker run -it --mount source=sa-devops-junvol1,destination=/sa-devops-junvol1 centos bash
+   79  docker ps
+   80  cd /var/lib/docker/volumes/sa-devops-junvol1/_data
+   81  ls
+   82  cat container_file1.txt
+   83  clear
+   84  ls
+   85  echo "rec1" > hostfile1.txt
+   86  ls
+   87  docker run -it --mount source=sa-devops-junvol1,destination=/sa-devops-junvol1 centos bash
+   88  docker volume inspect sa-devops-junvol1
+   89  cd ~
+   90  clear
+   91  docker images
+   92  docker run -it tomcat:8.0 bash
+   93  docker ps -a
+   94  clear
+   95  docker ps -a
+   96  docker stop fe9c4053575c 65669e8e8938 16bd9534af84
+   97  docker ps -a
+   98  docker stop 43815e30fa2a
+   99  docker ps -a
+  100  history
+
+    9  clear
+   10  docker ps
+   11  docker ps -a
+   12  docker ps
+   13  docker run -it -p 8085:8080 tomcat:8.0 bash
+   14  docker run -it -p 8085:8080 tomcat:8.0
+   15  history
+				
+Next :
+
+		Create New Container Images 
+			- docker commit
+			- docker build
+		Container Orchestration tools 
+			- Overview of Docker Compose
+			- Overview of Docker Swarm 
+			- Kubernetes 			
+		
