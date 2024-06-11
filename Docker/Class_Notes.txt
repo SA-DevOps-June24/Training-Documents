@@ -445,3 +445,259 @@ Next :
 			- Overview of Docker Swarm 
 			- Kubernetes 			
 		
+
+######################
+Day 3 - 11th June 2024
+######################
+
+	Create New Container Images 
+		
+		- docker commit :::::::::
+		
+				- Is used to create a new container image based on the existing Container
+
+			Create a Container 		--> build 
+				- install git
+				- jdk 
+				- maven 
+			
+			Syntax:
+				docker commit <container_id> <new_image_name>
+			
+			Eg.: 			
+				docker commit 0654ac297a7e loksaieta/sa-june-img1
+
+
+			Publish the newly created image to container registry 
+			
+			- Login to DockerHub Registry
+
+			- Create an Access Token in dockerhub account 
+			
+			- docker login  -u <docker_hub_Account_ID>
+			
+			- password : asdasdasd
+			
+			- docker push loksaieta/sa-june-img1:latest
+
+		
+		
+		- docker build ::::::::
+		
+				- Is used to create a new container image based on the Dockerfile definition
+				
+				docker build -t loksaieta/sa-june-gitimg1:v1.0 .			# '.' denote the Dockerfile reference
+				
+			Dockerfile :::
+			
+				- Is used to define the properties of Container Image
+				- It composed of various Instructions - stages/Layer 
+				- Application Developers will create the Dockerfile and maintain it in the Source_Code Repository.
+
+mkdir docker-contents
+cd docker-contents				
+vi Dockerfile 
+
+FROM debian
+RUN apt-get update -y
+RUN apt-get install git -y
+
+docker build -t loksaieta/sa-june-gitimg1:v1.0 .			# '.' denote the Dockerfile reference
+
+docker history loksaieta/sa-june-gitimg1:v1.0				# Used to get the history/layers of Images
+
+
+	Dockerfile Instructions :::
+	
+	
+	FROM 	::: Is used to define the base image(pull from docker registry)
+
+	RUN 	::: Is used to run/execute package managers to manage the packages in container
+
+	COPY	::: Is used to Copy the files from Host Machine to Container path
+	
+	ADD		::: Is used to Copy the files from Host Machine to Container path
+				It is also used to copy the files from Url.
+	
+	CP		::: Is used to copy the files within the containers
+
+	WORKDIR ::: Is used to specify the current working dir
+
+	EXPOSE  ::: Is used to expose the container port
+	
+	ENV 	::: Is used to set envi. variables within the image
+
+	VOLUME	::: Is used to define the volume to be used in image
+	
+	CMD	::: Is used to execute any command when run the container
+			/bin/bash  ==> Can be replaced at runtime.
+
+	ENTRYPOINT	::: Is used to execute any command when run the container
+			/sleep 30 ==> Cannot be replaced at runtime
+				
+			
+			Publish the newly created image to container registry 
+			
+			- Login to DockerHub Registry
+
+			- Create an Access Token in dockerhub account 
+			
+			- docker login  -u <docker_hub_Account_ID>	
+			
+			- password : OeczxczxM
+			
+			- docker push loksaieta/sa-june-img1:latest			
+				
+							
+
+	- Docker Compose ::::
+	
+		- Is a docker extension/plugins - used to run multiple containers as a service.
+		
+		
+		Eg.:
+		
+		3 - Tier Application Architecture :: ===> Containerized :::
+		
+		
+		
+			Front-End Layer 	-- 	User Interface 		---> C1
+			
+			Application Layer 	--  Business Logic		---> C2 - not start ?
+			
+			Backend Layer		--  DataBase  			---> C3
+			
+			
+		E_Commerce Application :
+		
+			User_Registration 	===> 3 - Tier Application Architecture :
+			
+			User_Login 
+			
+			Payment 
+			
+		Install Docker Compose plugin/Utility
+		
+		Define Service ===> *.yaml
+			
+
+//https://docs.docker.com/compose/install/linux/
+
+
+DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+mkdir -p $DOCKER_CONFIG/cli-plugins
+curl -SL https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+	
+
+chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+
+docker compose version
+// Docker Compose version v2.18.
+
+	-> Create a manifest/config file ==> Is written using yaml script.
+		vi docker-compose.yaml
+
+[root@ip-172-31-47-216 service1]# cat docker-compose.yaml
+
+version: '3'
+services:
+  webserv:
+    image: "tomcat:8.0"
+    ports:
+      - 8098:8080
+  dbserv:
+    image: "redis:alpine"
+
+docker compose version
+
+docker compose up			Start all the container as defined in docker-compose file
+
+docker compose down 		Stop all the container as defined in docker-compose file
+
+
+	Container Orchestration Tools :
+
+		Overview of Docker Swarm 
+	
+		Kubernetes
+		
+	Container Orchestration Tools are used to ensure High Availability of Containers
+
+		3 - Tier Application Architecture :: ===> Containerized :::
+		
+			Front-End Layer 	-- 	User Interface 		---> C1,C1.1,C1.2 			---> 3 replicas of container
+			
+			Application Layer 	--  Business Logic		---> C2,C2.1,C2.2
+			
+			Backend Layer		--  DataBase  			---> C3,C3.1,C3.2
+			
+		
+		Docker Swarm ::
+		
+			It is used to orchestrate Docker Container only
+			
+			It is used to create replicas of Container, It helps to ensure high availability of Container 
+			
+			Scale-up 
+			
+			Scale-Down 
+			
+			Not possible to Auto-Scale 
+			
+			Not possible to perform Load Balancing 
+			
+			
+			Online-Ticket booking system
+			
+				-> 10000 users to login to their applications -- 100 replicas of containers
+				
+				-> 50000 users ??? -- 500 replicas of containers ???
+				
+				-> 10000 users -- 100 replicas of containers
+			
+			
+		Environments :
+		
+			Dev 
+			
+			QA 
+			
+			UAT 						===> Prod Environment --> Prod Server1,2,3,4,5,6
+			
+			
+		Kubernetes ::::
+		
+			--> It is Open-Source Container Orchestration Tool
+			
+			--> Used to Ensure High-Availability of Containers/Pods
+			
+			--> Create the replicas of Container/Pods to ensure high availability.
+
+			--> Perform Auto-Scaling 
+			
+			--> Load-Balancing
+			
+			--> Using Kubernetes and DevOps Process, we can achieve Continous Deployment
+			
+		
+		
+		Managed Services::::
+		
+			AWS 	---> ECS/ECR/EKS
+			
+			Azure 	---> ACS/ACR/AKS
+			
+			GCP 	---> GCE/GCR/GKE
+			
+			
+Next :::
+
+	- Work with Kubernetes :
+	
+	- Kubernetes Architecture
+	
+	- Kubernetes Concepts / Terminologies
+	
+	- Kubernetes Object like pods, deployment controller object, Namespaces...
+	
+	- Jenkins Pipeline Demo with Docker and Kubernetes
