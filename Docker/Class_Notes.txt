@@ -689,6 +689,64 @@ docker compose down 		Stop all the container as defined in docker-compose file
 			
 			GCP 	---> GCE/GCR/GKE
 			
+  123  clear
+  124  docker ps -a
+  125  docker run -it --mount source=sa-devops-junvol1,destination=/sa-devops-junvol1 centos bash
+  126  clear
+  127  ls
+  128  docker images
+  129  docker run -it debian bash
+  130  docker ps
+  131  docker ps -a
+  132  docker start 0654ac297a7e
+  133  docker ps
+  134  docker exec -it 0654ac297a7e bash
+  135  docker ps
+  136  docker stop 0654ac297a7
+  137  docker ps
+  138  docker images
+  139  docker commit 0654ac297a7e loksaieta/sa-june-img1
+  140  docker images
+  141  docker run -it loksaieta/sa-june-img1 bash
+  142  docker images
+  143  docker login  -u loksaieta
+  144  docker push loksaieta/sa-june-img1:latest
+  145  ls
+  146  docker-contents
+  147  cd do
+  148  mkdir docker-contents
+  149  cd docker-contents/
+  150  vi Dockerfile
+  151  cat Dockerfile
+  152  docker images
+  153  docker build -t loksaieta/sa-june-gitimg1:v1.0
+  154  docker build -t loksaieta/sa-june-gitimg1:v1.0 .
+  155  docker images
+  156  cat Dockerfile
+  157  docker history loksaieta/sa-june-gitimg1:v1.0
+  158  docker ps -a
+  159  cd ~
+  160  clear
+  161  docker --version
+  162  DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+  163  mkdir -p $DOCKER_CONFIG/cli-plugins
+  164  curl -SL https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-x86_64 -o
+  165  curl -SL https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+  166  chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+  167  docker compose version
+  168  vi docker-compose.yaml
+  169  docker images
+  170  docker ps
+  171  docker ps -a
+  172  celar
+  173  clear
+  174  docker ps
+  175  docker images
+  176  docker-compose up
+  177  docker compose up
+  178  docker ps
+  179  docker ps -a
+  180  history
 			
 Next :::
 
