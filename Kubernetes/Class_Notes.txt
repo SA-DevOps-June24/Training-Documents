@@ -1,0 +1,253 @@
+######################
+Day 4 - 12th June 2024
+######################	
+	
+	Kubernetes ::::
+
+	--> It is Open-Source Container Orchestration Tool
+	
+	--> Used to Ensure High-Availability of Containers/Pods
+	
+	--> Create the replicas of Container/Pods to ensure high availability.
+
+	--> Perform Auto-Scaling 
+	
+	--> Load-Balancing
+	
+	--> Using Kubernetes and DevOps Process, we can achieve Continous Deployment
+
+
+	Kubernetes Architecture
+	
+		- Kubernetes Components 
+	
+	Terminologies of Kubernetes 
+	
+	Concepts of Kubernetes 
+	
+		- Pods 
+		
+		- Nodeport Service 
+		
+		- Deployment Controller Object
+		
+		- Volume - Hostpath 
+		
+		- Namespace 
+		
+	Installation and Configuration of Kubernetes ::
+	
+	
+	1. Developers Create the Source Code 
+	
+	2. Commit the Source_Code to Source_Code Repository(Github)
+	
+	3. Jenkins_pipeline  ---> for Monolith Application Architecture
+		- SCM_Checkout - Download the source_code to build server
+		- Application_Build - Process of compiling the source code and create artifacts(Binaries - *.war/*.jar) 
+		- Deploy the artifacts to Target Server(QA/UAT/PROD) 
+		
+	3.1 Jenkines Pipeline ---> for Containerized - Micro-Service Based Application Architecture
+	
+		- SCM_Checkout 
+		- Application_Build using Maven 
+		- Application Image Build using Docker 
+		- Published to Container Registry(Dockerhub)
+		- Deploy the Container Image in the Target Server and run the Application using Container.
+		
+		
+	Kubernetes Architecture ::::
+	
+		Master & Worker-Nodes
+
+		Jenkins_Master 	(VM)			==> Used to Create CICD Pipeline Projects and schedule the builds in slave nodes
+			Jenkins_Slave_Node (VM)		==> Used to perform the application Build & Create artifacts
+		
+		Kubernetes_Master (VM)			==> Validate the deployment request and schedule the deployment to workernodes
+			Kubernetes_WorkerNode1 (VM) ==> Used to run the Application Containers/Pods
+			Kubernetes_WorkerNode2 (VM)	==> Used to run the Application Containers/Pods
+			Kubernetes_WorkerNode3 (VM) ==> Used to run the Application Containers/Pods
+			
+			
+		Components of Kubernetes Architecture:
+		
+			- API Server 	
+				- Receive the incoming request & validate the request 
+				- Update the details in the ETCD Database
+			
+			- ETCD 
+				- Single point of source to all kubernetes objects				
+			
+			- Scheduler
+				- It will identify the healthy WorkerNode for deployment
+			
+			- Controller Manager 
+				- It is reponsible to run the pods/containers in its' desired state.
+				- Ensure High Availability by creating replicas.			
+			
+			- Kubelet 
+				- Is a kubernetes Agent that run on all the Nodes 
+				- Kubelet is responsible to start/deploy containers/Pods
+			
+			- CRI - Container Runtime Interface(Container-D)
+				- Used to download the Container Images from Container Registry
+			
+			- Kube-Proxy 
+				- Is used to establish networking between the pods.
+				- It is responsible to assign unique pod IP Address for communication.
+				
+				
+	Terminologies of Kubernetes  :::
+	
+		Kubernetes_Master (VM)		# Validate the deployment request and schedule the deployment to workernodes
+		
+		Kubernetes_WorkerNode1 (VM) # Used to run the Application Containers/Pods
+		
+		Container Image 		# Is a static file, that define the properties(application & its dependencies) of the container
+								# Image are Non-Executable
+								# Composed of Layer of Instructions
+							
+		Container				# Executable units of Container Image
+		
+		Container Registry		# Is used to store/Manage the Container Images
+								# DockerHub 
+							
+		Container Repository	# It is sub-set of Container Registry
+		
+		Pods 					# Pod is the smallest unit of schedule/Task that runs in Kubernetes
+								# Is used to run the Containers in Kubernetes
+		
+		Kubectl					# It is command line utility used to interact with Kubernetes Master
+		
+		Kubelet					# It is Agent that runs in the Kubernetes Nodes, it is used to start the pods 
+
+		Kubernetes Cluster		# It is Logical group of Worker Nodes 
+								# Collection of Worker Nodes
+		
+			Kubernetes_Master (VM)		- Control Plane
+				Kubernetes_Cluster					--> Logical Name to group the Worker-Nodes 
+					Kubernetes_WorkerNode1 (VM)
+					Kubernetes_WorkerNode2 (VM)
+					Kubernetes_WorkerNode3 (VM)
+					
+		
+		Kubernetes_Master (VM)	
+        	Kubernetes_Cluster1				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+        	Kubernetes_Cluster2				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+        	Kubernetes_Cluster3				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+
+		Kubernetes_Master 
+			Kubernetes_Master1 (VM)	
+				Kubernetes_Cluster1	
+					Kubernetes_WorkerNode1 (VM)
+					Kubernetes_WorkerNode2 (VM)
+					Kubernetes_WorkerNode3 (VM)
+				Kubernetes_Cluster2				
+					Kubernetes_WorkerNode1 (VM)
+					Kubernetes_WorkerNode2 (VM)
+					Kubernetes_WorkerNode3 (VM)
+				Kubernetes_Cluster3				
+					Kubernetes_WorkerNode1 (VM)
+					Kubernetes_WorkerNode2 (VM)
+					Kubernetes_WorkerNode3 (VM)
+			Kubernetes_Master2 (VM)	
+				Kubernetes_Cluster1				
+					Kubernetes_WorkerNode1 (VM)
+					Kubernetes_WorkerNode2 (VM)
+					Kubernetes_WorkerNode3 (VM)
+				Kubernetes_Cluster2				
+					Kubernetes_WorkerNode1 (VM)
+					Kubernetes_WorkerNode2 (VM)
+					Kubernetes_WorkerNode3 (VM)
+				Kubernetes_Cluster3				
+					Kubernetes_WorkerNode1 (VM)
+					Kubernetes_WorkerNode2 (VM)
+					Kubernetes_WorkerNode3 (VM)
+					
+	
+	Hybrid Environment
+	
+		On-Premises Servers 
+		
+		Cloud Platform 		
+		
+			AWS 
+		
+			Azure 
+		
+		
+		CICD Pipeline 
+		
+			Build the code 
+			Deploy the Application to Target Environment (AWS/Azure/On-prem)
+
+					
+	Pods :::
+
+	Installation and Configuration of Kubernetes :::
+	
+		minikube 	# Just of learning the kubernetes basic objects
+		
+		kubeadm 	# Is Command Line Utility - Used to Install and Configure Kubernetes Master and WorkerNodes.
+
+		
+	1. Install Pre-requisites 	
+	2. Install Kubernetes Components 	
+	3. Post Installation Activities 
+		
+	
+		Kubernetes_Master (VM)					
+			Kubernetes_WorkerNode1 (VM)
+			Kubernetes_WorkerNode2 (VM)
+			
+	Installation Procedures :::
+	
+		Launch 3 VMs --> ami - ubuntu v22.04
+		
+		- Commands/Tools executed in all the Nodes(Master/Worker)
+		
+			1. Setup up the Host Name 
+			2. Install Docker 
+			3. Install Container Runtime Interface (CRI) - Container-D
+				- Install and Configure the pre-requisites for Container-D 
+				- Install Container-D
+				- Setup Container-D Configurations
+				- Start/Enable Container-D Service
+			4. Install kubeadm, Kubelet, Kubectl 
+			5. Disable Swap 
+			6. Enable Kubelet 
+				
+		
+		- Commands/Tools executed only on Master Node
+			
+			7. kubeadm Init 
+			8. Install and Configure Master based on given instructions
+			
+		- Commands executed only on Worker Node 
+
+			9. kubeadm join using token based authentication
+		
+Next :::
+
+	Installation and Configuration of Kubernetes
+	
+	Concepts of Kubernetes 
+	
+		- Pods 
+		
+		- Nodeport Service 
+		
+		- Deployment Controller Object
+		
+		- Volume - Hostpath 
+		
+		- Namespace 
