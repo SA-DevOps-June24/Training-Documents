@@ -251,3 +251,339 @@ Next :::
 		- Volume - Hostpath 
 		
 		- Namespace 
+
+
+
+
+######################
+Day 5 - 14th June 2024
+######################
+
+Application :
+
+Cluster 
+	Micro-Services 
+		deployed as pods
+		
+
+		Kubernetes_Master (VM)					My - E_Commerce - www.amazon.com
+        	Kubernetes_Cluster1				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+        	Kubernetes_Cluster2				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+        	Kubernetes_Cluster3				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+				
+
+		Kubernetes_Master (VM)					My - E_Commerce - www.flipcart.com
+        	Kubernetes_Cluster1				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+        	Kubernetes_Cluster2				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+        	Kubernetes_Cluster3				
+        		Kubernetes_WorkerNode1 (VM)
+        		Kubernetes_WorkerNode2 (VM)
+        		Kubernetes_WorkerNode3 (VM)
+				
+				
+		
+		
+	www.amazon.com 	E_Commerce Portal - Web Application		Micro-Service Based Application Architecture 5000 Micro-Services (VM)
+	
+		User_Sign-up - Micro-Service1	- Source_Code_Repo - Developer1 - Change the code,(python/html/mysql), test, promote to (QA)further testing -- production
+		User_Login 	 - Micro-Service2	- Source_Code_Repo - Developer2 - Change the code,(java/html/mysql), 	test, promote to (QA)further testing -- production
+		Search 		 - Micro-Service3	- Source_Code_Repo - Developer2 - Change the code,(python/Django/mysql), test, promote to (QA)further testing -- production
+		Add to cart 
+		place_order 
+		Payment 
+		Confirm_Order 
+		Track
+
+
+				Containerization :::
+				
+					- It is used to reduce the number of VMs.					
+					
+					
+						QA_Server(VM)
+							Container-Engine
+								C1 - Micro-Service1
+								C2 - Micro-Service2
+								C3 - Micro-Service3
+								C4 - Micro-Service4
+								C5 - Micro-Service5
+								
+		DevOps Team ::
+
+		What is DevOps ???
+		
+		DevOps ???
+		
+		DevOp is a Software Development Strategy which is used to promote collaboration between the teams like Development and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery/Deployment, Continuous Monitoring in more automated fashion.
+		
+		
+		Teams:
+		
+		DevOps Team : Micro-Service Based -- How quickly they can develop, unit-test, qa, uat and deploy to prod 
+		
+			Containerization 
+				Dockerfile --> 
+				
+				DevOps Team will create Dockerfile Templates and share it with Development Team 
+				
+				Kubernetes --> Manifest file *.yaml - DevOps Team(Kubernetes Developers) will create Kubernetes Manifest File Template for Developers
+		
+			Infra-Structure Management Team 
+			Application Deveopment Team			Core Team -- Developing Business Application 
+			Testing Team					--> 10 Days to complete the testing ==> within a Day or 1 Hours
+			Release Management Team
+			Production Support Team 
+			Production Monitoring Team 
+			Security Team 
+			
+			
+			
+		Domain : 
+			Telecomm Domain
+			
+			SP1 --> Today - introduce a new offer to their customers if the IT TEam takes 1 Month to implement
+			
+			SP2 
+			
+			
+		Environments :::
+		
+		Non-Prod Environments												Production Environment
+		
+			Dev Environment	(Developers - IDE, Unit Testing) - Source Code Repo
+			
+				10 Unit Test Scenarios ::: 8 Scenarios 
+			
+			Build Environment
+						(Build & Create Artifacts - *.war)
+						(Build Docker Image based on *.war)
+						
+		DevOps Team	::
+			Test Environments	*.war / Application Image
+				QA - Quality Assurance Testing 				30 QA Test Scenarios
+					(f/r/s/p/)
+				
+				UAT - User Acceptance Testing(Actual/Realtime Production/Customer Data)	=======>>			Production Servers
+												
+				SP1 --> Today - introduce a new offer to their customers - if the IT TEam takes 1 Month to implement
+				
+		CICD Pipeline :::
+		
+			SCM_Checkout 
+			
+			Build 
+			
+			Unit Testing 		10 Unit Test Scenarios JUNIT / MAVEN 
+			
+			Promote to higher enviroments
+			
+		DevOps Team 
+		
+			2 members - Repo Mgmt - github/az-repo
+			
+			2 members - Jenkins 
+			
+			Kubernetes --> Kubernetes : Developers/Admin/Security Admin
+			
+			Infra-Structure -> ansible/terraform 
+			
+			
+		Deployment :::: Launch 
+		
+			--> Just a process of copying the artifacts from one server to another server 
+			
+			Manual / Automated ???
+			
+			
+		
+			installed git / Visual Studio Code 
+			
+			downloaded git / Visual Studio Code  from their application Artifactory Libraries *.exec
+		
+	
+		Continuous Delivery/Deployment :::
+		
+			- Both are used to release the changes to Production 
+				- non-prod to prod
+			- Both are related to Production Releases
+			
+			
+			
+			Continuous Delivery :
+				- It is a process that expects manual approval/Manual intervension for production release. 
+				- Might leads to some down-time during production release. 
+				
+				Jenkins 
+				
+			Banking Applications ::
+				Online Banking - 
+				
+					Production Release Window :
+						4Hrs - 6Hrs - Non-Business Hours 
+						
+						Down the envi. 
+						
+						Checklist of all teams 
+						
+						Promote the Application to Production Environment
+						
+						Thorough Testing @ Production Environment
+						
+						V1.0
+						
+						V1.1	Latest ==> 
+							Fix the issue with deployment window 
+							else revert.
+						
+					
+			Continuous Deployment :
+				- It is a process that Never expects any manual approval/Manual intervension for production release. 
+				- It helps to perform fully automated Production Releases.
+				- Production Release can be achieved without any downtime.
+				- This can be achieved only with Micro-Service based Application Architecture
+				- This is considered as a matured level of DevOps.
+				
+				
+			DevOps Tools ::
+			
+				Jenkins/Docker/Kubernetes/
+				
+			facbook / google / amazon  -- every hr they deploy new features
+			
+			EC2  K8s - CICD
+			
+		
+		Docker ?
+		
+		Image (vs) Container
+
+
+
+				
+	3.1 Jenkines Pipeline ---> for Containerized - Micro-Service Based Application Architecture
+	
+		- SCM_Checkout 
+		- Application_Build using Maven 
+		- Application Image Build using Docker 
+		- Published to Container Registry(Dockerhub)
+		- Deploy the Container Image in the Target Server and run the Application using Container.
+
+
+######################
+Day 6 - 17th June 2024
+######################
+
+				
+	Installation and Configuration of Kubernetes
+	
+	Concepts of Kubernetes 
+	
+		- Pods 
+		
+		- Nodeport Service 
+		
+		- Deployment Controller Object
+		
+		- Volume - Hostpath 
+		
+		- Namespace 					
+		
+		
+		
+		
+			
+	1. Install Pre-requisites 	
+	2. Install Kubernetes Components 	
+	3. Post Installation Activities 
+		
+	
+		Kubernetes_Master (VM)					
+			Kubernetes_WorkerNode1 (VM)
+			Kubernetes_WorkerNode2 (VM)
+			
+	Installation Procedures :::
+	
+		Launch 3 VMs --> ami - ubuntu v22.04
+		
+		- Commands/Tools executed in all the Nodes(Master/Worker)
+		
+			1. Setup up the Host Name 
+			2. Install Docker 
+			3. Install Container Runtime Interface (CRI) - Container-D
+				- Install and Configure the pre-requisites for Container-D 
+				- Install Container-D
+				- Setup Container-D Configurations
+				- Start/Enable Container-D Service
+			4. Install kubeadm, Kubelet, Kubectl 
+			5. Disable Swap 
+			6. Enable Kubelet 
+				
+		
+		- Commands/Tools executed only on Master Node
+			
+			7. kubeadm Init 
+			8. Install and Configure Master based on given instructions
+			
+		- Commands executed only on Worker Node 
+
+			9. kubeadm join using token based authentication	
+			
+			
+	Open-Source Kubernetes 
+	
+		
+	
+	Managed Services :
+	
+		AWS - ECS,ECR,EKS 
+		
+		Azure - ACS,ACR,AKS 
+		
+		GCP - GCE,GCR,GKE 
+		
+	Eg.: 
+			QA _ Server 
+			
+				jdk 
+				setup envi variables - JAVA_HOME 
+				Tomcat 
+				Start Tomcat 
+			
+			JEnkins SLave Node 
+			
+				Maven 
+	
+	
+	Concepts of Kubernetes 
+	
+		- Pods 
+		
+		
+	How to login to running container ???
+	
+		docker exec -it <container_id> bash
+	
+	How to Access the Container Application thru internet ???
+	
+		port mapping/binding
+		
+	
+	NodePort Service 			# Is used to expose the pod to internet.
+	 - It create a service with nodeport range 30000 - 32767
+	 
+	 using this nodeport number and external ip address of node we can access the application
