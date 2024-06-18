@@ -587,3 +587,154 @@ Day 6 - 17th June 2024
 	 - It create a service with nodeport range 30000 - 32767
 	 
 	 using this nodeport number and external ip address of node we can access the application
+
+
+
+######################
+Day 7 - 18th June 2024
+######################
+
+	Deployment Controller Object :::
+	
+	Deployment Controller ::
+	
+	Pods ::
+	
+	Deployed a pod.
+	
+		workernode1
+		
+		Access the application running inside the pod?
+		
+		kubectl get pods -o wide 
+		
+		<external_ip>:<node_port>
+		
+		Controller Objects :::
+
+			Replicaset ::
+			
+				- Used to run a specific instance of pods.
+				- It is used to create replicas of pod.
+				
+			- Controller Manager 
+				- It is reponsible to run the pods/containers in its' desired state.
+				- Ensure High Availability by creating replicas.	
+				
+			Deployment Controller Object 
+			
+				- It is used create replicas of pods using Replicaset
+				
+				- It is responsible to run the pods in its' desired state.
+				
+				- It helps to scale-up or scale-down the pods 
+				
+				- It helps to upgrade or rollback the changes without any downtime.
+				
+				- It uses Rolling-Update Deployment Strategy to ensure Zero Downtime.
+				
+				
+			
+	Environments :
+	
+		Non-Prod Environments ::				Production Environments (LIVE)
+		
+		Dev 										Prod Server1,2,3,4,5
+		
+		Build 
+		
+		QA 
+		
+		UAT 
+
+		
+		Kubernetes_Cluster 
+			Kubernetes_WorkerNode1,2,3,4,5
+			
+			deploy a copy pod 
+			
+			Replicaset --> Create the copies of pods : replica = 3
+			
+			
+		E_Commerce Portal :: / Online Ticket Booking System 
+		
+		
+		1000 Users to access in parallel
+		10000 
+		
+		
+		10 replicas of pods to support 1000 users 
+		
+		Scale up the Pod instances 
+		
+		Pod --> mywebapp_img:v1.0  ---> 5 Replicas of Pod 
+		
+		mywebapp_img:v1.0   	===> 	mywebapp_img:v1.1
+		
+		
+		Upgrade :::
+		
+		Rolling-Update Deployment Strategy  --> Is a default Strategy for deployment.
+		
+		mywebapp_img:v1.0		===> 	mywebapp_img:v1.1
+		
+		pod_1.1							pod_2.1
+		
+		pod_1.2							pod_2.1
+		
+		pod_1.3							pod_2.1
+		
+		
+	1. Create Deployment Controller Object 
+	
+		- Create Deployment Object 
+		
+		- Create Replicaset 
+		
+		- Create Pod Instances based on Replicas
+	
+	
+	
+	Namespace :
+	
+		- It is a logical partition of the cluster.
+		
+		
+		QA_Server for deployment 		- Test Environment
+		
+		
+	Kubernetes Volume :
+	
+		Hostpath Volume :::
+		
+	
+Kubernetes Services :::
+
+	NodePort Service 		# Used to expose the Pod to internet
+	
+	ClusterIP Service 		# Used for internal communication between the pods within the cluster
+	
+		Front-End Pod     <====>		 Back-End Pod 
+						Cluster-IP
+						
+						
+	Load Balancer Service 	# Used to access the Web Application using one end-point url
+	
+Next : Demo 
+
+	Demo of Pod Deployment using Deployment Controller Object and NodePort Service 
+	
+	- Java Springboot Application 
+	
+		- build 
+		
+		- create artifacts 
+		
+		- create docker image
+		
+		- push to dockerhub 
+		
+		- Deploy to Kubernetes Cluster using Deployment Controller Object and NodePort Service
+		
+		
+	CICD Pipeline.
