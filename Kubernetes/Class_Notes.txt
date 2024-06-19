@@ -738,3 +738,191 @@ Next : Demo
 		
 		
 	CICD Pipeline.
+
+######################
+Day 8 - 19th June 2024
+######################
+
+
+	Implement Docker and Kubernetes into DevOps Workflow :::
+	
+	CICD ::
+	
+	git/jenkins/docker/kubernetes 	==> CICD Pipeline - to automate the build and deployment.
+
+
+
+	1. Developers Create the Source Code 
+	
+	2. Commit the Source_Code to Source_Code Repository(Github)
+	
+	3. Jenkins_pipeline  ---> for Monolith Application Architecture
+		- SCM_Checkout - Download the source_code to build server
+		- Application_Build - Process of compiling the source code and create artifacts(Binaries - *.war/*.jar) 
+		- Deploy the artifacts to Target Server(QA/UAT/PROD) 
+		
+			Jenkins_Master
+				Jenkins_Slave
+			Tomcat_Server		Target Server 
+			
+	3.1 Jenkins Pipeline ---> for Containerized - Micro-Service Based Application Architecture
+	
+		- SCM_Checkout 
+		- Application_Build using Maven 
+		- Application Image Build using Docker 
+		- Published to Container Registry(Dockerhub)
+		- Deploy the Container Image in the Target Server and run the Application using Container.
+	
+	Project Workflow :
+	
+	- Jenkins Pipeline ---> for Containerized - Micro-Service Based Application Architecture
+	
+		- 
+		SCM_Checkout 
+		- Application_Build using Maven 
+		- Application Image Build using Docker 
+		- Published to Container Registry(Dockerhub)
+		- Deploy the Container Image in the Target Server and run the Application using Container.
+	
+	- How to Onboard any Application to DevOps CICD Process :
+	
+		- DevOps Assessment
+	
+	
+	- Implement DevOps ::
+	
+		- Java Maven Web Application --> 
+		
+		
+	- Create CICD Pipeline :::
+	
+		- It composed of various stages to automate builds and deployments
+	
+	
+	- Jenkins CICD Pipeline Stages :::
+
+		- SCM_Checkout 
+		- Application_Build using Maven 
+		- Application Image Build using Docker 
+		- Published to Container Registry(Dockerhub)
+		- Deploy the Container Image in the Kubernetes Cluster
+		
+	- How to Create Jenkins CICD Pipeline to automate builds and deployments for Java Web Application ?
+	
+	
+		Infra-Structure to Create CICD Pipeline - (VMs) 
+		
+			Jenkins_Master 					-->	Create Jenkins CICD Pipeline Projects and Schedule it to run in the Slave Node
+				Jenkins_Slave(Build_Server)	--> Perform Application Build and Create Artifacts(Binaries - executables - *.war/*.jar)
+												Build Application Image 
+			Kubernetes_Master				--> Schedule to Deploy the Application Images  # Target Environment
+				Kubernetes_WorkerNode1
+				Kubernetes_WorkerNode2
+		
+		Tools ::	https://www.jenkins.io/doc/book/installing/linux/
+		
+			Jenkins_Master (VM)						--->	jdk, jenkins, git  
+				Jenkins_Slave(Build_Server) (VM)	--->	git, jdk, maven, Docker_Engine
+											
+			Kubernetes_Master (VM)					---> 	All Kubernetes Components 				
+				Kubernetes_WorkerNode1 (VM)
+				Kubernetes_WorkerNode2 (VM)
+	
+	
+		Integrate Jenkins Slave_Node with Jenkins_Master
+		
+		Integrate Kubernetes_Master with Jenkins 
+	
+	- Jenkins CICD Pipeline :::
+	
+	
+	SCM_Checkout ---> Build Application Artifacts & Unit_Testing ---> Build Docker Application Image ---> Publish App_Img to DockerHub ---> Deploy to Kubernetes Cluster
+		
+	
+	- DevOps CICD Pipeline Trigger/Execution WorkFlow :::
+	
+		Developers' Role :
+		
+			1. In Dev Environment, Developers use IDEs like (Eclipse/Visual Studio/Visual Studio Code/Pycharm)
+			
+			2. Push the Source Code Changes to Remote Repository(Github) thru IDEs 
+		
+		Thru DevOps Automation :
+		
+			3. GITHUB Webhook to Trigger the CICD Pipeline
+			
+			4. - SCM_Checkout 
+			   - Application_Build using Maven 
+			   - Application Image Build using Docker 
+	           - Published to Container Registry(Dockerhub)
+	           - Deploy the Container Image in the Kubernetes Cluster
+			   
+			5. Email Notification to Users Through Jenkins Pipeline 
+
+
+	Implementation ::::
+
+		Jenkins_Master (VM)					
+	    	Jenkins_Slave(Build_Server) (VM)
+	    								
+	    Kubernetes_Master (VM)				
+			Kubernetes_WorkerNode1 (VM)
+	    	Kubernetes_WorkerNode2 (VM)
+			
+			
+			
+	Understanding Source Code Repository :::
+	
+		- src 
+		
+		- pom.xml		# Define the dependencies and plugins required to build java mvn application
+		
+		- Dockerfile 	# Used to define the properties of Application and its dependencies to Build Application Image
+		
+		- kubernetes manifest file - *.yaml
+						# Used to Create Deployment Controller Object and NodePort Service
+						
+	
+pipeline {
+
+    agent { label 'slave1' }
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}
+	
+    stages {
+        stage('SCM_Checkout ') {
+            steps {
+                echo 'Perform SCM Checkout'
+                git 'https://github.com/SA-DevOps-June24/devops-javamvn-webapp.git'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+                sh 'mvn clean package'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+				sh 'docker version'
+				sh "docker build -t loksaieta/loksai-eta-app:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/loksai-eta-app:${BUILD_NUMBER} loksaieta/loksai-eta-app:latest"
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/loksai-eta-app:latest"
+			}
+		}
+		
+	}
+}
