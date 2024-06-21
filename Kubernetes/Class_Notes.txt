@@ -926,3 +926,119 @@ pipeline {
 		
 	}
 }
+
+
+######################
+Day 9 - 21st June 2024
+######################
+		
+		Infra-Structure to Create CICD Pipeline - (VMs) 
+		
+			Jenkins_Master 					-->	Create Jenkins CICD Pipeline Projects and Schedule it to run in the Slave Node
+				Jenkins_Slave(Build_Server)	--> Src_Code Repo.
+												Perform Application Build and Create Artifacts(Binaries - executables - *.war/*.jar)
+												Build Application Image 
+
+			Kubernetes_Master				--> Schedule to Deploy the Application Images  # Target Environment
+				Kubernetes_WorkerNode1
+				Kubernetes_WorkerNode2
+	
+		
+		
+		
+		
+		kubectl create -f <file_name>.yaml			# This Command should be executed in Kubernetes_Master 
+		
+			Thru Jenkins - How to copy the files/artifacts to remote machines 
+			
+			Publish Over SSH Plugins
+			
+			
+			Install Publish Over SSH Plugins in Jenkins Master Node 
+			
+			Using this plugins Connect to Kubernetes Master and Copy the Manifest File to Kubernetes Master
+			
+			SSH Connection :::
+			
+				Host_Name 
+				
+				User_Name 
+				
+				Credentials (Keys)
+			
+pipeline {
+
+    agent { label 'slave1' }
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}
+	
+    stages {
+        stage('SCM_Checkout ') {
+            steps {
+                echo 'Perform SCM Checkout'
+                git 'https://github.com/SA-DevOps-June24/devops-javamvn-webapp.git'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+                sh 'mvn clean package'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+				sh 'docker version'
+				sh "docker build -t loksaieta/loksai-eta-app:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/loksai-eta-app:${BUILD_NUMBER} loksaieta/loksai-eta-app:latest"
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/loksai-eta-app:latest"
+			}
+		}
+		stage('Deploy to Kubernetes_Cluster') {
+			steps {
+				script {
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'Kubernetes_Cluster', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f k8smvndeployment.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'k8smvndeployment.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}				
+			}
+		}
+	}
+}
+			
+			
+			
+		kubectl create -f k8smvndeployment.yaml	
+		
+		kubectl apply -f k8smvndeployment.yaml	
+		
+			
+	- DevOps CICD Pipeline Trigger/Execution WorkFlow :::
+	
+		Developers' Role :
+		
+			1. In Dev Environment, Developers use IDEs like (Eclipse/Visual Studio/Visual Studio Code/Pycharm)
+			
+			2. Push the Source Code Changes to Remote Repository(Github) thru IDEs 
+		
+		Thru DevOps Automation :
+		
+			3. GITHUB Webhook to Trigger the CICD Pipeline
+			
+			4. - SCM_Checkout 
+			   - Application_Build using Maven 
+			   - Application Image Build using Docker 
+	           - Published to Container Registry(Dockerhub)
+	           - Deploy the Container Image in the Kubernetes Cluster			
+			
+			
