@@ -1,0 +1,108 @@
+######################
+Day 9 - 21st June 2024
+######################
+
+IAC Tools ::::	Infra-Structure As Code 
+
+		50+ Test Servers with different configs
+		
+		can it be created manually ?
+			- Time Consuming 
+			- Manual Errors
+
+		Infra-Structure Management Team ::
+		
+			They are responsible for Server Provisioning/Creation and Configurations
+
+	Terraform ::
+			
+		- Is a IAC Tool - Used to Provision the Servers 
+	
+	Ansible ::
+		- Is a Configuration Management Tool - Used to Configure the Infra-Structure
+		- Agentless
+			- Means, Ansible doesn't requires any agents to be installed in target nodes 
+			- Ansible can be connected to target nodes using SSH Connection protocols and run the required modules in target node
+	
+	
+	Fundamentals of Ansible :::
+	
+		- Is a Configuration Management Tool - Used to Configure the Infra-Structure
+		
+		- Why we need Ansible ?
+	
+		- Ansible Architecture
+		
+		- Ansible Architecture Components
+		
+			- Ansible Controller 
+
+			- Ansible Nodes/Clients
+				
+			- Ansible Inventory File			# First thing to do
+		
+			- Ansible Modules 					# Functions used to perform some task on target nodes
+			
+			- Ansible Config file 
+
+		- Ansible Terminologies
+		
+		Eg.:
+		'
+		
+		
+		Ansible_Controller Machine :
+		
+			- Jenkins_SlaveNodes (VM) :::
+			
+				Target1	- Build Java Application -> git/jdk/maven
+					
+				Target2	- Python Build 
+					
+				Target3	- .Net
+					
+					- Angular/NodeJS
+
+
+Summary :		
+	
+Kubernetes :
+
+	CICD - Pipeline 
+		
+	- DevOps CICD Pipeline Trigger/Execution WorkFlow :::
+	
+		Developers' Role :
+		
+			1. In Dev Environment, Developers use IDEs like (Eclipse/Visual Studio/Visual Studio Code/Pycharm)
+			
+			2. Push the Source Code Changes to Remote Repository(Github) thru IDEs 
+		
+		Thru DevOps Automation :
+		
+			3. GITHUB Webhook to Trigger the CICD Pipeline
+			
+			4. - SCM_Checkout 
+			   - Application_Build using Maven 
+			   - Application Image Build using Docker 
+	           - Published to Container Registry(Dockerhub)
+	           - Deploy the Container Image in the Kubernetes Cluster			
+		
+		
+	Intro to Ansible
+	
+	
+
+Next :::
+	
+		- Working with Ansible
+
+			- Install Ansible 
+			
+			- Ansible Adhoc Commands 
+			
+			- Ansible Playbooks 
+			
+			- Misc. Ansible Concepts
+			
+	
