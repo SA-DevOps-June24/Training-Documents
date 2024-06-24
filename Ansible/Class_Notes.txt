@@ -106,3 +106,72 @@ Next :::
 			- Misc. Ansible Concepts
 			
 	
+########################
+Day 10 - 24th June 2024
+########################
+
+- Working with Ansible
+
+	- Install Ansible 
+	
+	- Ansible Adhoc Commands 
+	
+			--> Used to run a module in the Ansible Nodes
+			--> Cannot be reusable
+			--> Used to run just one module per execution 
+			
+					Jenkin_SlaveNode1
+						git, jdk, maven 
+					Tomcat_Server 
+						jdk, Tomcat Server
+						
+				
+				VM -> apt install git -y
+				
+	
+	- Ansible Playbooks 
+			--> Playbooks are used to run series of modules
+			--> It is created based on the series of task 
+			--> It should be Created based on reusable entities.
+
+				VM -> apt instal git -y
+				
+				
+				Build_Server ::
+				
+					git
+					jdk
+					maven 
+					
+				AD Team1 --> Build Server of java Maven Appln.
+				
+					VM --> 
+					
+						apt install git 
+						apt install jdk11 
+						apt install maven 
+
+				AD Team2 --> Build Server of java Maven Appln.
+				
+					VM --> 
+					
+						apt install git 
+						apt install jdk17 
+						apt install maven 
+			
+Summary :
+
+	Install/Configure Ansible Controller and Ansible Nodes
+	Create Ansible Inventory Files
+	Ansible Adhoc Commands
+
+
+Next :
+	
+	- Ansible Playbooks 
+	
+	- Misc. Ansible Concepts
+		- Variables  
+		- Handlers
+		- Register 
+		- Roles 
