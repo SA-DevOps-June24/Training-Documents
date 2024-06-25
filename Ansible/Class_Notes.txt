@@ -175,3 +175,59 @@ Next :
 		- Handlers
 		- Register 
 		- Roles 
+
+########################
+Day 11 - 25th June 2024
+########################
+
+
+	- Ansible Playbooks 
+	
+	- Misc. Ansible Concepts
+		- Variables  
+		- Register 
+		- Handlers
+		- Roles 
+		
+	- Intro. to Terraform
+		
+		
+	Ansible Playbooks :::
+	
+		Structure of Ansible Playbook 
+		
+		Ansible Command to run the Playbook 
+		
+		- Handlers
+		- Roles 		
+		
+		
+		Install Tomcat :
+		
+			- install pre-requisites		(jdk)
+			- install actual tool			(Tomcat)
+			- post installation activities 	(Start-Tomcat)
+		
+		- Roles :::
+		
+		ansible-galaxy role install v01ddweller.tomcat85_install
+				
+		- Ansible Loop
+		
+Next :::
+
+	Fundamentals of Terraform :::
+	
+	What is Terraform ?
+	
+	Terraform Architecture Workflow
+	
+	Terraform Concepts and Terminologies
+	
+	Install Terraform
+	
+	Working Terraform
+	
+	Prometheus & Grafana
+	
+	Capstone Project 
