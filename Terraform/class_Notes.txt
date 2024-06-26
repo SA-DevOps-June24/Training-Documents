@@ -1,0 +1,129 @@
+
+########################
+Day 12 - 26th June 2024
+########################
+
+	Fundamentals of Terraform :::
+	
+	What is Terraform ?
+	
+	Terraform Architecture Workflow
+	
+	Terraform Concepts and Terminologies
+	
+	Install Terraform
+	
+	Working Terraform
+	
+	
+	IAC - Infra-Structure As Code :::
+	
+		Resource Provisioning/Creation		--> Terraform/AWS-Cloudformation/ARM/
+		
+		Resource Configurations				--> Ansible/Chef/Puppet 
+		
+		EC2 Instance - AWS 
+		
+			shell script --> VM 
+			
+			
+			IAC Tools -- Declarative Script
+			
+				Ansible -- *.yaml 
+				
+				Cloudformation -- *.json -- AWS 
+
+				Terraform -- HCL(Hashi-Corp Declarative Language) Script (based on Json file format)
+				
+				Terraform is used to create resources in any target enviroments.
+				
+					- AWS 
+					- AZURE 
+					- GCP 
+					- GITHUB 
+					- Kubernetes
+					
+				Multi-Cloud Platform
+				Hybrid Environments
+				
+		Terraform Architecture Workflow
+			- Terraform Working Model
+				- Identify the Scope(Target Platform:AWS/Azure/On-prem)
+				- Write the Terraform Script/Configuration file based on the target platform
+				- Perform Terraform Init - Used initialize the Terraform Provider
+				- Perform Terraform Plan - Used to Preview the Script 
+				- Perform Terraform Apply - Used to implement the actual change or resource allocation
+				
+		
+		Working Terraform					
+		
+		Install Terraform :
+			
+			Install Terraform in the Local Windows Machine
+				https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+				
+				https://registry.terraform.io/?product_intent=terraform
+				
+				https://registry.terraform.io/providers/hashicorp/aws/latest
+				
+				https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+				
+				
+				Goto this link,
+				Select Manual Installation 
+					- Click on Appropriate Package 
+						- Choose Window AMD64 - Download
+								- This will download a zip file 
+									- Extract and place the terraform exec in the desired path
+				Setup the Environment Variable for Terraform Exec
+					From Windows start menu, goto system properties
+					
+			Install Visual Studio Code IDE 
+				https://code.visualstudio.com/download
+				
+			Install Hashi-Corp Terraform Extension for Visual Studio Code 
+			
+			Goto File Menu in VS Code, select Open Folder and Goto the desired file location and choose/create a folder.
+			
+			
+			
+		Terraform Concepts and Terminologies
+		
+			terraform --version 
+			
+			- Terraform Working Model
+				- Identify the Scope(Target Platform:AWS/Azure/On-prem)
+				- Write the Terraform Script/Configuration file based on the target platform
+				- Perform Terraform Init - Used initialize the Terraform Provider
+				- Perform Terraform Plan - Used to Preview the Script 
+				- Perform Terraform Apply - Used to implement the actual change or resource allocation
+				
+				
+			- Terraform is used to ::
+			
+				- Create/Add the Resource 		+ 
+				
+				- Modify/Change the Resource 	~
+				
+				- Delete/Destroy the Resource 	-
+				
+				
+				
+		Create Access Key and Secret Key on AWS :
+		
+			AWS Access Key : zsdfsfsdf
+			
+			AWS Secret Key : dfdfgd
+			
+			
+		EC2 Instance :
+		
+		
+		Terraform State File :::
+		
+			- Is used to maintain the current resources state of the target environment
+			- This is used to eliminate the duplicate resource definitions 
+			- It is always recommended to preserve the tfstate file
+			
+			
+		Create a Test Environment : Test Server(VM) 
