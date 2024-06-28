@@ -1,0 +1,89 @@
+########################
+Day 13 - 28th June 2024
+########################
+
+	Prometheus & Grafana :::
+	
+	
+	playbook
+	
+	host:
+	task:
+	  apt:
+		name: docker
+		state: present 
+	  command:
+	    docker run -it image_name port 8080:8080
+		
+	
+Freshers - 
+	0 - 1 yr devops associate 
+	0 - 1.5 
+	
+	Prometheus & Grafana :::
+
+		Continous Monitoring ::::
+		
+			--> Ensure that the Infra-Structure and the Applications are highly available and eusure business continuity.
+			
+			--> Proactively monitor the prod enviroments before it get impacted.
+			
+			
+			Monitoring :
+			
+				Infra-Structure Monitoring
+					- Prometheus & Grafana,Dynatrace,Nagios,Splunk...
+					
+						Production Servers :
+						
+							24/7 - CPU/Memory Utilization
+							
+						Jenkins_Slave1 - build --> repo,artifacts,images - consume memory
+						1000s of services
+						
+						80% ==> Clean-up the volumes
+						80% of cpu ==> stop/kill the long running process/
+						add more cpu's
+						
+				Application Monitoring
+					- DataDog,App-Dynamics				
+		
+	Covered DevOps Modules related to CICD
+		git,jenkins,docker,kubernetes,Ansible,Terraform
+		
+		Production Support / Production Monitoring Team
+		
+		
+	Infra-Structure Monitoring
+		
+		Prometheus & Grafana
+			- Prometheus 
+				--> Is a Infra-Structure Monitoring Tool 
+				
+			- Grafana 
+				--> Is a Visualization Tool - used to create Monitoring Dashboards
+				
+		
+		Architecture of Monitoring Tool :
+		
+		Components of Monitoring Tools Architecture :
+
+		Install and Manage the Monitoring Tools
+		
+			https://prometheus.io/download/
+			
+		
+		
+Next ::
+
+	Summary of DevOps tools on project perspective!
+	
+		Jenkins/kubernetes/Docker
+		
+		Capstone Project Discussion! 
+		
+		1st July We complete DevOps Modules 
+		
+		
+		
+		Capstone Project Discussion! 8th & 9th of July 
