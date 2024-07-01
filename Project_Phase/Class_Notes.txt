@@ -1,0 +1,164 @@
+########################
+Day 14 - 1st July 2024
+########################
+
+		
+		Capstone Project Discussion! 8th & 9th of July 
+		
+		Jenkins :: Build Orchestration Tool 
+		
+		As a Developer 
+		
+			- Developers are just the consumers of Jenkins Jobs.
+				- Execute the Job/Pipelines 
+				- Cancel the builds 
+				- View the workspace and job config
+				
+		
+		As a Devops Team :
+		
+			- Owner of Jenkins Tool at enterprise level!
+			
+		Role of Jenkins Administrator ::::
+		
+			- Installation of Jenkins 
+			- Plugins Management 
+			- User Management 
+			- Security Management 
+			- Tools Management 
+			- Jenkins Global system Management 
+			- Credentials Management 
+			- Jenkins Master and Slave Node Configurations and Management
+			- Create CICD pipelines to Automate Application Builds and Deployments
+			- Onboard Applications to Jenkins CICD Pipeline Process 
+			- Periodic Upgrade of Jenkins and all its plugins 
+			- Back-up and Recovery of Jenkins Server and Components 
+			- Trouble-shooting 
+			
+			
+		Kubernetes
+		
+			- Deployment Tools 
+			
+			- Kubernetes Developer
+			
+			- Kubernetes Administrator
+			
+			- Kubernetes Security Administrator
+			
+					- API Server!
+					
+						RBAC - Role Based Access Control 
+							Cluster Level 
+							
+							Namespace Level 
+							
+						Authentication
+						
+						Authorization
+			
+			
+			
+		8th & 9th of July - Capstone Project Discussion!
+
+			- LMS Portal 
+			
+				- Project Documentations 
+		
+					Banking Domain
+						- Banking Domain Knowledge 
+						- Banking Domain DevOps Project Document 
+					
+					Healthcare Domain
+						- Healthcare Domain Knowledge 
+						- Healthcare Domain DevOps Project Document 
+
+		
+		Pre-requisites ::
+
+			Banking Domain					---> 	
+				- Banking Domain Knowledge 
+			
+			Healthcare Domain
+				- Healthcare Domain Knowledge 
+
+			Complete all your assignments (If Possible)
+			
+			Revise all the DevOps Modules - GIT/Jenkins/Docker/Kubernetes/Ansible 
+
+			
+			1. Create CICD Pipeline to :
+			
+				SCM_Checkout
+				Application_Build
+				Application_Image_Build(Using Ansible)
+				Publish Application_Image to Container Registry(Using Ansible)
+				Deploy Application_Image and Run Container in QA_Target_Server(Using Ansible)
+					- using port mapping 
+				Send Email Notification to the Testing Team 
+				
+				Selenium/Selenium-Grid  
+				TestNG 
+				JUnit 
+				
+				
+			2. Create a Pipeline to :
+			
+				Periodically, Clean-up the Outdated Workspace folders,Application_Artifacts,Application_Images from Build_Server(Jenkins_SlaveNode) - Once in 3 Days @10PM
+			
+			3. Explore how the .Net Applications are built and deployed - Just aware of the .net applications build, test and deployment tools ****
+			
+			
+			
+			
+			
+			
+				SCM_Checkout
+				Application_Build
+				Application_Image_Build(Using Ansible)
+				Publish Application_Image to Container Registry(Using Ansible)
+				Deploy Application_Image and Run Container in QA_Target_Server(Using Ansible)
+					- using port mapping 
+				Send Email Notification to the Testing Team 
+				Automated Testing using Selenium/Selenium-Grid & TestNG 
+					 - Test Data/Scenarios/Cases  ---> It will be part of Repository
+					 
+				Send Email Notification to the Testing Team and Dev Team 
+			
+			
+			
+			
+			
+				Java Applications :
+					Maven Applications - CICD 
+					
+					.net 
+					python
+					Angular
+					NodeJS 
+					COBOL 
+					Ruby 
+					C/C++ 	 Embedded Applications  
+					
+			
+					
+	DevOps Tools Stack
+	
+	
+		Dev Environment
+			- servers
+				Dev_Servers/Machines,Integrated with remote-repo(github),SonarQubeAnalyzer(Code Quality Checking),Artifactories
+		Build Environments
+			- servers 
+				Build_Server/Machines,Integrated with Build Tools(maven/gradle),Docker Contaier_Engine,Container Registries,Artifactories
+		Test Environments
+			- servers 
+				QA_server/Machines, Testing Tools/Test Grids,Artifactories
+				UAT_Server/Machines, Testing Tools,Artifactories
+		Prod Environments
+			- Prod_Server/Clusters, Deployment Tools - Kubernetes,Openshift/XLR/XLD
+					- Replicas of Prod Servers
+					
+					
+		CICD : Servers - Jenkins Master and Slave_Nodes.
+					
