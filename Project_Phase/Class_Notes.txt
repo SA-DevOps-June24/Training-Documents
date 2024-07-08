@@ -162,3 +162,160 @@ Day 14 - 1st July 2024
 					
 		CICD : Servers - Jenkins Master and Slave_Nodes.
 					
+
+					
+########################
+Day 15 - 8th July 2024
+########################
+
+
+	Project Discussion : 8th & 9th of July
+	
+	Problem Statement
+					
+		
+		- Project Documentations 
+
+			Banking Domain
+				- Banking Domain Knowledge 
+				- Banking Domain DevOps Project Document 
+			
+			Healthcare Domain
+				- Healthcare Domain Knowledge 
+				- Healthcare Domain DevOps Project Document 
+					
+		
+		
+		- Banking Domain DevOps Project Document 					
+		- Healthcare Domain DevOps Project Document 					
+
+	Implementation :::
+
+		DevOps 
+		
+		CICD Pipeline : 
+		
+			Containerized Deployment using Kubernetes 
+			
+			
+		Task 1: Infra-Structure
+		
+			Create VMs using Terraform and Configure the VMs using Ansible 
+			
+		Task 2:	Build & Deployments
+		
+			CICD Pipeline 
+			
+			
+			
+			
+		Infra-Structure :::	Ubuntu - v22.04
+		
+			How many VMs we need to create and configure to implement CICD ?
+			
+				CICD ::	5 VMs
+					
+						Jenkins_Master 		#VM
+							Jenkin_Slave 
+						Kubernetes_Master
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2
+				
+					Purpose of each VM ?
+					
+						Jenkins_Master				# Create & Schedule CICD Pipeline Jobs	
+							Jenkin_Slave 			# To Perform Builds App. Build & Docker Build
+						Kubernetes_Master			# To Deploy the Pods 
+							Kubernetes_WorkerNode1
+							Kubernetes_WorkerNode2								
+		
+				Infra-Structure :: 1 VM (Terraform,Ansible)
+			    	Ansible_Controller 									# To Configure Jenkins_Slave Node 
+					Terraform Server(Install in local Windows Machine	# To Provision Jenkins_Slave Node
+		
+				Monitoring :: 1 VM 
+				
+					Prometheus/Grafana 
+					
+					
+					
+		Tools :::
+
+				CICD ::
+				
+					Jenkins_Master					# jdk,jenkins,git
+						Jenkin_Slave(Build_Server)	# git,jdk,maven,docker
+					Kubernetes_Master				# cri,kubelet,kubectl,kubeadm,...
+						Kubernetes_WorkerNode1
+						Kubernetes_WorkerNode2
+												
+				Infra-Structure ::		VM for Ansible Controller
+					Jenkin_Slave(Build_Server)		# git,jdk,maven,docker
+					Monitoring						# Prometheus & Grafana
+					
+						Create Build_Server using Terraform 
+						Configure Build Tools using Ansible 
+				
+				
+		Integration of Servers/VMs :::
+		
+				Jenkins_Master					
+                	Jenkin_Slave(Build_Server)	
+                Kubernetes_Master				
+		        	Kubernetes_WorkerNode1
+		        	Kubernetes_WorkerNode2
+
+		
+		CICD Pipeline Job/Project :::
+		
+			CICD Piepline : To Automate Build & Deployment of Containerized Applications
+			
+				SCM_Checkout
+				Application Build
+				Docker Image Build 
+				Pubish Docker Image to container Registry 
+				Deploy to Kubernetes
+				
+		
+		Onboard the Applications :::
+		
+				SCM_Checkout		(Banking Application Src_Code Repository Clone URL)
+				Application Build
+				Docker Image Build 
+				Pubish Docker Image to container Registry 
+				Deploy to Kubernetes			
+		
+		
+				SCM_Checkout		(Healthcare Application Src_Code Repository Clone URL)
+				Application Build
+				Docker Image Build 
+				Pubish Docker Image to container Registry 
+				Deploy to Kubernetes	
+			
+						
+Next Session ::
+
+		Demo :: Banking Application using Docker & Kubernetes
+			
+			CICD ::	Demo.
+			
+				Jenkins_Master					# jdk,jenkins,git
+					Jenkin_Slave(Build_Server)	# git,jdk,maven,docker
+				Kubernetes_Master				# cri,kubelet,kubectl,kubeadm,...
+					Kubernetes_WorkerNode1
+					Kubernetes_WorkerNode2			
+			
+			
+			
+				Infra-Structure ::		VM for Ansible Controller
+					Jenkin_Slave(Build_Server)		# git,jdk,maven,docker
+					Monitoring						# Prometheus & Grafana
+					
+						Create Build_Server using Terraform 
+						Configure Build Tools using Ansible 			
+			
+		
+		
+		
+		
+	
