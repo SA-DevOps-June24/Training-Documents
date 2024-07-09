@@ -316,6 +316,159 @@ Next Session ::
 			
 		
 		
+########################
+Day 15 - 8th July 2024
+########################		
+		
+		
+		CICD Pipeline Job/Project :::
+		
+			CICD Pipeline : To Automate Build & Deployment of Containerized Applications
+			
+				SCM_Checkout
+				Application Build
+				Docker Image Build 
+				Login to DockerHub Registry
+				Publish Docker Image to Container Registry 
+				Deploy to Kubernetes	
+		
+		
+		Source Code Repository is the Input 
+		
+		
+			Build Configuration 
+				MVN - pom.xml
+		
+	- DevOps CICD Pipeline Trigger/Execution WorkFlow :::
+	
+		Developers' Role :
+		
+			1. In Dev Environment, Developers use IDEs like (Eclipse/Visual Studio/Visual Studio Code/Pycharm)
+			
+			2. Push the Source Code Changes to Remote Repository(Github) thru IDEs 
+		
+		Thru DevOps Automation :
+		
+			3. GITHUB Webhook to Trigger the CICD Pipeline
+			
+			4. - SCM_Checkout 
+			   - Application_Build using Maven 
+			   - Application Image Build using Docker 
+	           - Published to Container Registry(Dockerhub)
+	           - Deploy the Container Image in the Kubernetes Cluster			
+
+- Goto as per project document: https://github.com/StarAgileDevOpsTraining/star-agile-banking-finance		
+		
+- Fork this Repository 
+
+- Clone the repository in Local Machine
+
+- Make Necessary Changes In Dev Environment, Developers use IDEs like (Eclipse/Visual Studio/Visual Studio Code/Pycharm)
+
+- Push the Source Code Changes to Remote Repository(Github) thru IDEs 
+
+- Create CICD Pipeline ::
+
+	- Create Jenkin Master and Slave Node
+	- Integrate Jenkins Slave Node with Jenkins Master Node 
+	- Goto Docker Hub, Create DockerHub Access Token
+	- Goto Manage Jenkins --> Credentials --> Create New Credentials - username and password type
+	- Install Publish Over SSH Plugins 
+	- Goto Manage Jenkins --> System Configuration --> Configuration Kubernetes Master using Publish over SSH Settings 
+	
+	
+
+
+
+pipeline {
+
+    agent { label 'slave1' }
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}
+	
+    stages {
+        stage('SCM_Checkout ') {
+            steps {
+                echo 'Perform SCM Checkout'
+                git 'https://github.com/SA-DevOps-June24/Banking.git'
+            }
+		  post {
+			success {
+			  sh "echo 'Send mail on failure'"
+				mail bcc: 'loksaieta223@gmail.com', body: "SCM Checkout Successful", cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'SCM Checkout Successful', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+			}
+			failure {
+			  sh "echo 'Send mail on failure'"
+				mail bcc: 'loksaieta223@gmail.com', body: "SCM Checkout Failed", cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'SCM Checkout Failed', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+			}
+		  }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+                sh 'mvn clean package'
+            }
+		  post {
+			success {
+			  sh "echo 'Send mail on failure'"
+				mail bcc: 'loksaieta223@gmail.com', body: "The Job Status", cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'App_Build Success', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+			}
+			failure {
+			  sh "echo 'Send mail on failure'"
+				mail bcc: 'loksaieta223@gmail.com', body: "The Job Status", cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'App_Build Failure', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+			}
+		  }
+        }
+	
+        stage('Build Docker Image') {
+            steps {
+				sh 'docker version'
+				sh "docker build -t loksaieta/bankapp-eta-app:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/bankapp-eta-app:${BUILD_NUMBER} loksaieta/bankapp-eta-app:latest"
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/bankapp-eta-app:latest"
+			}
+		}
+		stage('Deploy to Kubernetes_Cluster') {
+			steps {
+				script {
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'Kubernetes_Cluster', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f kubernetesdeploy.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'kubernetesdeploy.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}				
+			}
+		}
+	}
+}		
+		
+
+
+smtp.gmail.com
+
+SMTP Authentication
+
+SMTP Port :: 465
+
+Login to Gmail :::
+
+Click Manage Account Settings
+
+@Left side panel - select Security 
+
+MFA --> mobile#
+App Password = 16 bytes of App Password. vsdfasdasasdfsdzr 
+What ? window
+Which Appln - email		
 		
 		
 	
